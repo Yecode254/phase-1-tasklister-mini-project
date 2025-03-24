@@ -1,24 +1,24 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const form=document.getElementById('create-task-form');
-  form.addEventListener('submit', function(e){e.preventDefault()
-      addtask()
-  })
-  function addtask() {
-      const text=document.getElementById('new-task-description');
-      const tasktext=text.value.trim();
-      
-      const li = document.createElement('li');
-      li.textContent=tasktext;
-      
-      const deletebutton=document.createElement('button');
-      deletebutton.textContent='❌';
-      deletebutton.addEventListener('click', function(){
-          li.remove();
-      })
-      li.appendChild(deletebutton)
-      const tasklist=document.getElementById('tasks');
-      tasklist.appendChild(li);
-      
-      text.value='';
-    }
-})
+  const form = document.querySelector("#create-task-form");
+  const taskList = document.querySelector("#tasks");
+
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const newTask = document.createElement("li");
+    const newTaskDescription = document.querySelector("#new-task-description");
+    newTask.innerText = newTaskDescription.value;
+
+    const deleteButton = document.createElement("button");
+    deleteButton.innerText = "Delete";
+
+    deleteButton.addEventListener("click", function () {
+      newTask.remove();
+    });
+
+    newTask.appendChild(deleteButton);
+    taskList.appendChild(newTask);
+
+    form.reset();
+  });
+});
